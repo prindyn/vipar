@@ -90,13 +90,15 @@ class ModelExtensionShippingNovaPoshta extends Model
                             $response_service['title'] = str_replace('Cost', '', $response_service['title']);
 
                             if (!empty($response_service['name'] = @$allServicesTypes[$response_service['title']])) {
-                                if (!empty($this->settings['general']['service_types'][$response_service['title']])) {
+                                if (!empty($this->settings['service_types'][$response_service['title']])) {
+                                    $cost = $this->settings['general']['show_shipping_cost'] ? $this->currency->convert($response_service['price'], 'UAH', $this->config->get('config_currency')) : 0;
+                                    $text = $this->settings['general']['show_shipping_cost'] ? $this->currency->format($this->tax->calculate($this->currency->convert($response_service['price'], 'UAH', $this->session->data['currency']), $this->config->get('shipping_novaposhta_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000) : '';
                                     $quote_data[$response_service['title']] = array(
                                         'code'         => 'novaposhta.' .  $response_service['title'],
                                         'title'        => $response_service['name'],
-                                        'cost'         => $this->currency->convert($response_service['price'], 'UAH', $this->config->get('config_currency')),
+                                        'cost'         => $cost,
                                         'tax_class_id' => $this->config->get('shipping_novaposhta_tax_class_id'),
-                                        'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($response_service['price'], 'UAH', $this->session->data['currency']), $this->config->get('shipping_novaposhta_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
+                                        'text'         => $text
                                     );
                                 }
                             }
@@ -146,7 +148,7 @@ class ModelExtensionShippingNovaPoshta extends Model
                         foreach ($response_services as $response_service['title'] => $response_service['price']) {
                             $response_service['title'] = str_replace('Cost', '', $response_service['title']);
 
-                            if (!empty($this->settings['general']['service_types'][$response_service['title']])) {
+                            if (!empty($this->settings['service_types'][$response_service['title']])) {
                                 if (!empty($response_service['name'] = @$allServicesTypes[$response_service['title']])) {
                                     $quote_data[$response_service['title']] = array(
                                         'code'         => 'novaposhta.' .  $response_service['title'],

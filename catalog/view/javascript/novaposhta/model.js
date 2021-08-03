@@ -26,6 +26,7 @@ var np = (function () {
 
             if (settlementRef.length) {
                 $.get('index.php?route=extension/shipping/novaposhta/warehouses&settlementRef=' + settlementRef, function(data) {
+                    $('#shipping_address_address_1').html('');
                     $.each(data, function(k, v) {
                         var newOption = new Option(v.id, v.text, false, false);
                         $('#shipping_address_address_1').append(newOption);
