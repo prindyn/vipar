@@ -3,6 +3,7 @@ class ControllerExtensionModuleCarousel extends Controller {
 	public function index($setting) {
 		static $module = 0;
 
+		$this->load->language('common/footer');
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 		
