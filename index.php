@@ -13,7 +13,6 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
-
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
