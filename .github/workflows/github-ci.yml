@@ -13,6 +13,6 @@ jobs:
     - name: Buil project to prod
       run: |
         pwd
-        rsync -azvh --exclude '.git' --exclude '.github-ci.yml' --exclude '.idea' -e "ssh -o StrictHostKeyChecking=no" . root@45.94.157.126:/var/www/vipar
+        rsync -azvh --exclude '.git' --exclude '.github' --exclude '.idea' -e "ssh -o StrictHostKeyChecking=no" . root@45.94.157.126:/var/www/vipar
         ssh -o StrictHostKeyChecking=no root@45.94.157.126 'chown -R www-data:www-data /var/www/vipar/* && chmod -R 755 /var/www/vipar/*'
         ssh -o StrictHostKeyChecking=no root@45.94.157.126 '/etc/init.d/apache2 restart'
