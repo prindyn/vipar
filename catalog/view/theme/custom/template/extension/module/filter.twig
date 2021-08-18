@@ -33,6 +33,6 @@ $('input[name^=\'filter\']:checked').each(function (element) {
 filter.push(this.value);
 });
 location = '
-{{ action }} filter=' + filter.join(',');
+{{ action }}&filter=' + filter.join(',');
 });
 </script>
